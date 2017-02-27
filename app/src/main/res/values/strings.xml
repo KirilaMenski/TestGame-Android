@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Game</string>
+    <string name="start_game">Начать игру</string>
+    <string name="score">Рекорды</string>
+    <string name="scores">Очки: %d</string>
+    <string name="choose_image">Выберите лишнюю картинку</string>
+    <string name="next_lvl">Продолжить</string>
+    <string name="wrong_answer">Неверный ответ!</string>
+    <string name="right_answer">Правильно! %s.</string>
+    <string name="loose">Вы проиграли</string>
+    <string name="start_again">Начать заново</string>
+    <string name="exit">Выйти</string>
+    <string name="win">Поздравляем, Вы выйграли!</string>
+    <string-array name="game_labels">
+        <item>Помидор ягода</item>
+        <item>Это звезда смерти</item>
+        <item>\nНе Скайвокер</item>
+        <item>Это река</item>
+        <item>Деревня</item>
+        <item>Астеройд</item>
+        <item>Четверо котят</item>
+        <item>Они ядовиты</item>
+        <item>\nНе относится к зиме</item>
+        <item>\nНе струнный инструмент</item>
+    </string-array>
+</resources>
