@@ -27,11 +27,13 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageHolder>
     private WeakReference<FragmentActivity> mActivity;
     private WeakReference<ImageAdapterListener> mListener;
     private List<ImageItem> mImageItems;
+    private boolean mClickble;
 
-    public ImageAdapter(FragmentActivity activity, List<ImageItem> imageItems, ImageAdapterListener listener) {
+    public ImageAdapter(FragmentActivity activity, List<ImageItem> imageItems, ImageAdapterListener listener, boolean clickable) {
         mActivity = new WeakReference<>(activity);
         mListener = new WeakReference<>(listener);
         mImageItems = imageItems;
+        mClickble = clickable;
     }
 
     @Override
@@ -48,7 +50,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageHolder>
         holder.mImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.get().itemClicked(item.isExcess(), item.getLabel());
+                if (!mClickble) mListener.get().itemClicked(item.isExcess(), item.getLabel());
             }
         });
     }

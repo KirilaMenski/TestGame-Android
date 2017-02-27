@@ -42,9 +42,12 @@ public class GameFragment extends Fragment implements ImageAdapter.ImageAdapterL
     private MainActivity mMainActivity;
     private LifeAdapter mLifeAdapter;
 
+    private List<ImageItem> mImageItems;
+
     private int mLevel = 1;
     private int mLife = 5;
     private int mScore = 0;
+    private boolean mClickable;
 
     @BindView(R.id.game_score)
     TextView mScoreLabel;
@@ -56,7 +59,6 @@ public class GameFragment extends Fragment implements ImageAdapter.ImageAdapterL
     RecyclerView mImageRecycler;
     @BindView(R.id.life_recycler)
     RecyclerView mLifeRecycler;
-
 
     public static GameFragment newInstance() {
         GameFragment fragment = new GameFragment();
@@ -76,7 +78,7 @@ public class GameFragment extends Fragment implements ImageAdapter.ImageAdapterL
     }
 
     private void loadAssets(int lvl) {
-        List<ImageItem> imageItems = new ArrayList<>();
+        mImageItems = new ArrayList<>();
         List<String> imagesPath = null;
         List<String> labels = Arrays.asList(getContext().getResources().getStringArray(R.array.game_labels));
         try {
@@ -86,17 +88,18 @@ public class GameFragment extends Fragment implements ImageAdapter.ImageAdapterL
         }
         for (int i = 0; i < imagesPath.size(); i++) {
             boolean excess = imagesPath.get(i).contains(EXCESS_VALUE);
-            imageItems.add(new ImageItem(labels.get(lvl - 1), ASSETS + FOLDER + lvl + "/" + imagesPath.get(i), excess));
+            mImageItems.add(new ImageItem(labels.get(lvl - 1), ASSETS + FOLDER + lvl + "/" + imagesPath.get(i), excess));
         }
-        Collections.shuffle(imageItems);
-        updateRecyclerLvl(imageItems);
+        Collections.shuffle(mImageItems);
+        updateRecyclerLvl(mImageItems);
     }
 
     private void updateRecyclerLvl(List<ImageItem> imageItems) {
-        mGameLabel.setText(getString(R.string.choose_image));
-        mLvlAdapter = new ImageAdapter(getActivity(), imageItems, this);
+        if (!mClickable) mGameLabel.setText(getString(R.string.choose_image));
+        mLvlAdapter = new ImageAdapter(getActivity(), imageItems, this, mClickable);
         mImageRecycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mImageRecycler.setAdapter(mLvlAdapter);
+        mClickable = false;
     }
 
     public void updateRecyclerLife(int life) {
@@ -119,7 +122,7 @@ public class GameFragment extends Fragment implements ImageAdapter.ImageAdapterL
     public void nextLevelClicked() {
         mLevel++;
         mNextLvl.setVisibility(View.INVISIBLE);
-        if(mLevel > MAX_LVL){
+        if (mLevel > MAX_LVL) {
             loadDialog(getString(R.string.win));
             return;
         }
@@ -139,10 +142,12 @@ public class GameFragment extends Fragment implements ImageAdapter.ImageAdapterL
             mLife--;
             updateRecyclerLife(mLife);
         } else {
+            mClickable = true;
             mNextLvl.setVisibility(View.VISIBLE);
             mGameLabel.setText(getString(R.string.right_answer, gameLabel));
             mScore += mLevel * 25;
             updateScore(mScore);
+            updateRecyclerLvl(mImageItems);
         }
     }
 
