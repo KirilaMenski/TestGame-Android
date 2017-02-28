@@ -9,4 +9,5 @@
     <color name="main_background">#ffd597</color>
     <color name="dialog_text_background_pressed">#27c2ff</color>
     <color name="dialog_text_background">#0bbaff</color>
+    <color name="image_stroke">#835440</color>
 </resources>

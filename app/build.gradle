@@ -12,6 +12,16 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            storePassword "game1234"
+            keyAlias 'by.test.game'
+            keyPassword "game1234"
+            storeFile file('../android.jks')
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false

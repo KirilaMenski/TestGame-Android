@@ -11,13 +11,15 @@
     <string name="start_again">Начать заново</string>
     <string name="exit">Выйти</string>
     <string name="win">Поздравляем, Вы выйграли!</string>
+    <string name="continue_game">Продолжить</string>
+    <string name="table">Таблица достижений</string>
     <string-array name="game_labels">
         <item>Помидор ягода</item>
         <item>Это звезда смерти</item>
         <item>\nНе Скайвокер</item>
         <item>Это река</item>
-        <item>Деревня</item>
-        <item>Астеройд</item>
+        <item>Это деревня</item>
+        <item>Это астеройд</item>
         <item>Четверо котят</item>
         <item>Они ядовиты</item>
         <item>\nНе относится к зиме</item>

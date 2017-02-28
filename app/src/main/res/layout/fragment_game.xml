@@ -19,7 +19,8 @@
             android:padding="@dimen/a_distance"
             android:text="@string/scores"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_small"/>
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="italic"/>
 
     </LinearLayout>
 
@@ -60,7 +61,8 @@
             android:padding="@dimen/b_distance"
             android:text="@string/choose_image"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_xbig"/>
+            android:textSize="@dimen/text_size_xbig"
+            android:textStyle="italic"/>
 
         <android.support.v4.widget.Space
             android:layout_width="match_parent"
@@ -92,8 +94,9 @@
             android:padding="@dimen/b_distance"
             android:text="@string/next_lvl"
             android:textColor="@android:color/white"
-            android:visibility="invisible"
-            android:textSize="@dimen/text_size_small"/>
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="italic"
+            android:visibility="invisible"/>
 
         <android.support.v4.widget.Space
             android:layout_width="match_parent"

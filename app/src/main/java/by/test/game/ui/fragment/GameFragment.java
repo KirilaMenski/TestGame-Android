@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,6 +27,7 @@ import by.test.game.ui.adapter.ImageAdapter;
 import by.test.game.ui.adapter.LifeAdapter;
 import by.test.game.ui.dialog.Dialog;
 import by.test.game.ui.entity.ImageItem;
+import by.test.game.util.TestGamePreferences;
 
 /**
  * Created by kirila on 27.2.17.
@@ -44,7 +48,7 @@ public class GameFragment extends Fragment implements ImageAdapter.ImageAdapterL
 
     private List<ImageItem> mImageItems;
 
-    private int mLevel = 1;
+    private int mLevel;
     private int mLife = 5;
     private int mScore = 0;
     private boolean mClickable;
@@ -71,6 +75,7 @@ public class GameFragment extends Fragment implements ImageAdapter.ImageAdapterL
         View view = inflater.inflate(LAYOUT, container, false);
         ButterKnife.bind(this, view);
         mMainActivity = (MainActivity) getActivity();
+        mLevel = TestGamePreferences.getLvl();
         loadAssets(mLevel);
         updateRecyclerLife(mLife);
         updateScore(mScore);
@@ -112,6 +117,10 @@ public class GameFragment extends Fragment implements ImageAdapter.ImageAdapterL
             loadDialog(getString(R.string.loose));
         }
 
+        if(life == 2){
+            showAdvertising();
+        }
+
     }
 
     public void updateScore(int scores) {
@@ -121,15 +130,26 @@ public class GameFragment extends Fragment implements ImageAdapter.ImageAdapterL
     @OnClick(R.id.next_lvl)
     public void nextLevelClicked() {
         mLevel++;
+        TestGamePreferences.saveLevel(mLevel);
         mNextLvl.setVisibility(View.INVISIBLE);
         if (mLevel > MAX_LVL) {
             loadDialog(getString(R.string.win));
             return;
         }
+        showAdvertising();
         loadAssets(mLevel);
     }
 
+    private void showAdvertising(){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.bannerflow.com/banner/meknomen-banner"));
+        startActivity(browserIntent);
+    }
+
     private void loadDialog(String string) {
+        TestGamePreferences.removeLvl();
+        Set<String> list = TestGamePreferences.getList();
+        list.add("" + mScore);
+        TestGamePreferences.saveList(list);
         Dialog dialog = Dialog.newInstance(string);
         dialog.setListener(this);
         dialog.show(getFragmentManager(), string);
