@@ -8,6 +8,7 @@
         android:id="@+id/image"
         android:layout_width="@dimen/image_width"
         android:layout_height="@dimen/image_height"
-        android:layout_margin="@dimen/a_distance"/>
+        android:layout_marginRight="@dimen/a_distance"
+        android:layout_marginTop="@dimen/a_distance"/>
 
 </LinearLayout>

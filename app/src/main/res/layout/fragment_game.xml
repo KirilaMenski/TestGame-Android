@@ -55,10 +55,9 @@
 
         <TextView
             android:id="@+id/game_label"
-            android:layout_width="match_parent"
+            android:layout_width="400dp"
             android:layout_height="@dimen/text_big_height"
             android:gravity="center"
-            android:padding="@dimen/b_distance"
             android:text="@string/choose_image"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_xbig"
@@ -91,7 +90,6 @@
             android:background="@drawable/next_lvl_txt_background"
             android:clickable="true"
             android:gravity="center"
-            android:padding="@dimen/b_distance"
             android:text="@string/next_lvl"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_size_small"
